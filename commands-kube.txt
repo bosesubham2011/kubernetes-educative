@@ -1,0 +1,33 @@
+kubectl version --output=yaml
+kubeadm init --apiserver-advertise-address $(hostname -i) --pod-network-cidr 10.5.0.0/16
+kubectl get nodes
+
+#Use it to see in real time, when the container is created
+
+kubectl get pods --watch 
+
+
+#This provides a nicely formatted multi-line overview of an object.
+#It even includes some important object lifecycle events. 
+#The following command describes the state of the “hello-pod” Pod.
+
+kubectl describe pods hello-pod
+
+
+#The following command helps us to get inside a POD and run bash
+
+kubectl exec -it hello-pod -- sh
+
+#In multi container pods please describe the name of the conatiner.
+#Otherwise, the sh session will start on the first container
+
+kubectl exec -it hello-pod --container <containername> -- sh
+
+#fetching logs
+
+kubectl logs <pod>
+
+
+#deleting pods
+kubectl delete -f pod.yml
+
