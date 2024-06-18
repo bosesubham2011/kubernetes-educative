@@ -31,3 +31,42 @@ kubectl logs <pod>
 #deleting pods
 kubectl delete -f pod.yml
 
+
+#Deployment details
+kubectl get deploy hello-deploy
+
+kubectl describe deploy hello-deploy
+
+
+#Replica set details
+kubectl get rs
+
+
+#Deploy after updating container image [--record records the command in History of deployment]
+kubectl apply -f deploy.yml --record
+
+#Monitor progress of deployment
+kubectl rollout status deployment hello-deploy
+
+
+#Deployment history
+kubectl rollout history deployment hello-deploy
+
+
+#Imperative change - Rollback changed
+kubectl rollout undo deployment hello-deploy --to-revision=1
+
+
+#Imperative service created
+kubectl expose deployment web-deploy \
+  --name=hello-svc \
+  --target-port=8080 \
+  --type=NodePort
+
+
+#Imperative service deleted
+kubectl delete svc hello-svc
+
+
+#Get svc enpoint controller
+kubectl get ep hello-svc
